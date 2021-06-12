@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from django.views import generic
+from .models import TodoList
 
-# Create your views here.
+class IndexView(generic.ListView):
+    template_name = 'todolist/index.html'
+    context_object_name = 'todolist'
+    def get_queryset(self):
+        """Return all the todos."""
+        return TodoList.objects.all()
